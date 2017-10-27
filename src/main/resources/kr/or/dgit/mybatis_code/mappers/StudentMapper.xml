@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.mybatis_code.dao.StudentDao">
+	<select id="findAllStudents" resultType="Student">
+		select stud_id as studId, name, email, dob from student <!-- set 메소드를 호출해준다. stud_id는 dao와 다르므로 as로 변경해준다. 알아서 List형태에 맞춰서 돌려준다. -->		
+	</select>
+	<insert id="insertStudent" parameterType="Student"><!--get 메소드에 알아서 넣어준다. -->
+		insert into student(name,email,dob) values(#{name},#{email},#{dob})
+	</insert> 
+	<select id="findStudentById" parameterType="int" resultType="Student">
+		select stud_id as studId, name, email, dob from student where stud_id= #{studId}
+	</select><!--stud_id는 테이블에서 지장한 이름이고, studId는 dto에서 지정한 것이므로 getset을 위해서는 studId로 작성해야한다.  -->
+	<delete id="deleteStudent" parameterType="int">
+		delete from student where stud_id=#{studId}
+	</delete>
+</mapper>
